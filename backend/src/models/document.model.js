@@ -1,7 +1,8 @@
 const pool = require('../config/db');
 
 async function insertDocument(chunk) {
-  const { text, embedding, metadata } = chunk;
+  const { embedding, metadata } = chunk;
+  const text = chunk.text.replace(/\0/g, '');
 
   const query = `
     INSERT INTO documents 
